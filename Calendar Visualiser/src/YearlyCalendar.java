@@ -10,7 +10,12 @@ public class YearlyCalendar {
 
     private static Map<String, Integer> months = new LinkedHashMap<>();
 
-    private final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private final String[] WEEKDAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private final int BIG_MONTH = 31;
+    private final int SMALL_MONTH = 30;
+    private final int LEAP_YEAR_FEBRUARY = 29;
+    private final int NOT_LEAP_YEAR_FEBRUARY = 28;
+
 
     private YearlyCalendar(int year) {
         this.year = year;
@@ -18,22 +23,25 @@ public class YearlyCalendar {
     }
 
     private void setupMonths(int year) {
-        months.put("January", 31);
+        months.put("January", BIG_MONTH);
+        months.put("February",getFebruaryDays(year));
+        months.put("March", BIG_MONTH);
+        months.put("April", SMALL_MONTH);
+        months.put("May", BIG_MONTH);
+        months.put("June", SMALL_MONTH);
+        months.put("July", BIG_MONTH);
+        months.put("August", BIG_MONTH);
+        months.put("September", SMALL_MONTH);
+        months.put("October", BIG_MONTH);
+        months.put("November", SMALL_MONTH);
+        months.put("December", BIG_MONTH);
+    }
+
+    private int getFebruaryDays(int year) {
         if ((year % 100 != 0 && year % 4 == 0) || year % 400 == 0) {
-            months.put("February", 29);
-        } else {
-            months.put("February", 28);
+            return LEAP_YEAR_FEBRUARY;
         }
-        months.put("March", 31);
-        months.put("April", 30);
-        months.put("May", 31);
-        months.put("June", 30);
-        months.put("July", 31);
-        months.put("August", 31);
-        months.put("September", 30);
-        months.put("October", 31);
-        months.put("November", 30);
-        months.put("December", 31);
+        return NOT_LEAP_YEAR_FEBRUARY;
     }
 
     public static void visualizeCalendar(int year) {
