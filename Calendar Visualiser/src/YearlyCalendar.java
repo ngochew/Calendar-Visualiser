@@ -45,6 +45,11 @@ public class YearlyCalendar {
     }
 
     public static void visualizeCalendar(int year) {
+
+        if (year < 1){
+            throw new IllegalArgumentException();
+        }
+
         YearlyCalendar yearlyCalendar = new YearlyCalendar(year);
 
         int currentMonthAsInteger = 0;
